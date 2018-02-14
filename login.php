@@ -80,16 +80,20 @@
             }
         ?>
         <form method="POST">
-            <label for="edt_username">User Name</label>
-            <input type="text" name="email" id="edt_username" width="60"><br>
-
-            <label for="edt_password">Password</label>
-            <input type="password" name="pass" id="edt_password" width="60"><br>
-
-            <input type="submit" onclick="return validateUserData();" value="Log In">
-            <input type="submit" name="cancel" value="Cancel">
+            <p>
+                <label for="edt_username">User Name</label>
+                <input type="text" name="email" id="edt_username" width="60">
+            </p>
+            <p>
+                <label for="edt_password">Password</label>
+                <input type="password" name="pass" id="edt_password" width="60">
+            </p>
+            <p>
+                <input type="submit" onclick="return validateUserData();" value="Log In">
+                <input type="submit" name="cancel" value="Cancel">
+            </p>
         </form>
-        For a password hint, view source and find an account and password hint in the HTML comments.
+        <p>For a password hint, view source and find an account and password hint in the HTML comments.</p>
         <!-- Hint:
         The account is umsi@umich.edu
         The password is the three character name of the

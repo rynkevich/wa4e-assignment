@@ -3,8 +3,11 @@
     require_once('include/common.php');
 
     function add_entry() {
-        if (empty_field_found()) {
+        if (is_ok_field_size()) {
             $_SESSION['error'] = 'All fields are required';
+            return;
+        } else if (!empty($_POST['image_url'] && !url_exists($_POST['image_url'])) {
+            $_SESSION['error'] = 'Invalid URL';
             return;
         } else if (!is_valid_email($_POST['email'])) {
             $_SESSION['error'] = 'Email address must contain @';
@@ -12,10 +15,11 @@
         }
 
         global $pdo;
-        $stmt = $pdo->prepare('INSERT INTO profile (user_id, first_name, last_name,
-            email, headline, summary) VALUES (:uid, :first, :last, :em, :hl, :sum)');
+        $stmt = $pdo->prepare('INSERT INTO profile (user_id, image_url, first_name, last_name,
+            email, headline, summary) VALUES (:uid, :img, :first, :last, :em, :hl, :sum)');
         $stmt->execute(array(
             ':uid' => $_SESSION['user_id'],
+            ':img' => $_POST['image_url'],
             ':first' => $_POST['first_name'],
             ':last' => $_POST['last_name'],
             ':em' => $_POST['email'],
@@ -65,23 +69,32 @@
             }
         ?>
         <form method="POST">
-            <label for="edt_first"><span style="font-weight:normal;">First Name:</span></label>
-            <input type="text" name="first_name" id="edt_first"><br>
-
-            <label for="edt_last"><span style="font-weight:normal;">Last Name:</span></label>
-            <input type="text" name="last_name" id="edt_last"><br>
-
-            <label for="edt_email"><span style="font-weight:normal;">Email:</span></label>
-            <input type="text" name="email" id="edt_email"><br>
-
-            <label for="edt_headline"><span style="font-weight:normal;">Headline:</span></label>
-            <input type="text" name="headline" id="edt_headline"><br>
-
-            Summary:<br>
-            <textarea name="summary" rows="8" cols="80"></textarea><br>
-
-            <input type="submit" value="Add">
-            <input type="submit" name="cancel" value="Cancel">
+            <p>
+                <label for="edt_first">First Name:</label>
+                <input type="text" name="first_name" id="edt_first">
+            </p>
+            <p>
+                <label for="edt_last">Last Name:</label>
+                <input type="text" name="last_name" id="edt_last">
+            </p>
+            <p>
+                <label for="edt_image_url">Image URL:</label>
+                <input type="text" name="image_url" id="edt_image_url">
+            </p>
+            <p>
+                <label for="edt_email">Email:</label>
+                <input type="text" name="email" id="edt_email">
+            </p>
+            <p>
+                <label for="edt_headline">Headline:</label>
+                <input type="text" name="headline" id="edt_headline">
+            </p>
+            <p><label for="txt_summary">Summary:</label></p>
+            <p><textarea name="summary" rows="8" cols="80" id="txt_summary"></textarea></p>
+            <p>
+                <input type="submit" value="Add">
+                <input type="submit" name="cancel" value="Cancel">
+            </p>
         </form>
     </div>
 </body>

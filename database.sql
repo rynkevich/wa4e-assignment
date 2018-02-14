@@ -18,6 +18,7 @@ CREATE TABLE users (
 CREATE TABLE profile (
     profile_id INTEGER NOT NULL AUTO_INCREMENT,
     user_id INTEGER NOT NULL,
+    image_url TEXT,
     first_name TEXT,
     last_name TEXT,
     email TEXT,

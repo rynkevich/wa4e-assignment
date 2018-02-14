@@ -10,21 +10,26 @@
         if ($profile = $selection->fetch(PDO::FETCH_ASSOC)) {
             echo '<table border="1">';
             echo '<tr><th>Name</th><th>Headline</th>' .
-                (is_logged() ? '<th>Action</th>' : '') .
-                '</tr>';
+                (is_logged() ? '<th>Action</th>' : '') . '</tr>';
             do {
-                echo '<tr><td><a href="/view.php?profile_id=' . $profile['profile_id'] .
-                    '">' . htmlentities($profile['first_name']) .
-                    ' ' . htmlentities($profile['last_name']) .
-                    '</a></td><td>' . htmlentities($profile['headline']) . '</td>' .
-                    (is_logged() ? '<td><a href="/edit.php?profile_id=' . $profile['profile_id'] .
+                echo '<tr>';
+
+                # Name
+                echo '<td><a href="/view.php?profile_id=' . $profile['profile_id'] . '">' .
+                    htmlentities($profile['first_name']) . ' ' . htmlentities($profile['last_name']) . '</a></td>';
+                # Headline
+                echo '<td>' . htmlentities($profile['headline']) . '</td>';
+                # Action
+                echo (is_logged() ? '<td><a href="/edit.php?profile_id=' . $profile['profile_id'] .
                     '">Edit</a> <a href="/delete.php?profile_id=' . $profile['profile_id'] .
-                    '">Delete</a></td>' : '') . '</tr>';
+                    '">Delete</a></td>' : '');
+
+                echo '</tr>';
             } while ($profile = $selection->fetch(PDO::FETCH_ASSOC));
-            echo '</table><br>';
+            echo '</table>';
         }
         if (is_logged()) {
-            echo '<a href="/add.php">Add New Entry</a>';
+            echo '<p><a href="/add.php">Add New Entry</a></p>';
         }
     }
 
