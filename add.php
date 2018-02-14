@@ -1,6 +1,6 @@
 <?php
-    require_once('pdo.php');
-    require_once('common.php');
+    require_once('include/pdo.php');
+    require_once('include/common.php');
 
     function add_entry() {
         if (empty_field_found()) {
@@ -52,7 +52,7 @@
 
 <head>
     <title>Arseni Rynkevich - Resume Registry, Add New</title>
-    <?php require_once 'bootstrap.php'; ?>
+    <?php require_once 'include/bootstrap.php'; ?>
 </head>
 
 <body>

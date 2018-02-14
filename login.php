@@ -1,6 +1,6 @@
 <?php
-    require_once('common.php');
-    require_once('pdo.php');
+    require_once('include/common.php');
+    require_once('include/pdo.php');
 
     function login() {
         if (strlen($_POST['email']) < 1 || strlen($_POST['pass']) < 1) {
@@ -66,8 +66,8 @@
 
 <head>
     <title>Arseni Rynkevich - Resume Registry, Log In</title>
-    <?php require_once 'bootstrap.php'; ?>
-    <script src="/validation.js"></script>
+    <?php require_once 'include/bootstrap.php'; ?>
+    <script src="js/validation.js"></script>
 </head>
 
 <body>

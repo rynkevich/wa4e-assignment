@@ -1,6 +1,6 @@
 <?php
-    require_once('pdo.php');
-    require_once('common.php');
+    require_once('include/pdo.php');
+    require_once('include/common.php');
 
     function show_registry() {
         global $pdo;
@@ -36,7 +36,7 @@
 
 <head>
     <title>Arseni Rynkevich - Resume Registry</title>
-    <?php require_once 'bootstrap.php'; ?>
+    <?php require_once 'include/bootstrap.php'; ?>
 </head>
 
 <body>

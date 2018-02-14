@@ -1,6 +1,6 @@
 <?php
-    require_once('pdo.php');
-    require_once('common.php');
+    require_once('include/pdo.php');
+    require_once('include/common.php');
 
     session_start();
 
@@ -33,7 +33,7 @@
 
 <head>
     <title>Arseni Rynkevich - Resume Registry, Delete Profile</title>
-    <?php require_once 'bootstrap.php'; ?>
+    <?php require_once 'include/bootstrap.php'; ?>
 </head>
 
 <body>
