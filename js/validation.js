@@ -10,6 +10,12 @@ function validateUserData() {
             alert('Both fields must be filled out');
             return false;
         }
+
+        if (em.indexOf('@') == -1) {
+            alert('Invalid email address');
+            return false;
+        }
+
         return true;
     } catch (exception) {
         return false;
