@@ -19,6 +19,12 @@
         return;
     }
 
+    if ($_SESSION['user_id'] != $profile['user_id']) {
+        $_SESSION['error'] = 'You are not allowed to delete this profile';
+        header('Location: index.php');
+        return;
+    }
+
     if (isset($_POST['delete'])) {
         $stmt = $pdo->prepare('DELETE FROM profile WHERE profile_id = :id');
         $stmt->execute(array(':id' => $_REQUEST['profile_id']));

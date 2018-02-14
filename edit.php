@@ -6,7 +6,7 @@
         if (is_ok_field_size()) {
             $_SESSION['error'] = 'All fields are required';
             return;
-        } else if (!empty($_POST['image_url'] && !url_exists($_POST['image_url'])) {
+        } else if (!empty($_POST['image_url']) && !url_exists($_POST['image_url'])) {
             $_SESSION['error'] = 'Invalid URL';
             return;
         } else if (!is_valid_email($_POST['email'])) {
@@ -45,6 +45,13 @@
     if (!($profile = get_profile_data())) {
         $_SESSION['error'] = 'Could not load profile';
         header('Location: index.php');
+        return;
+    }
+
+    if ($_SESSION['user_id'] != $profile['user_id']) {
+        $_SESSION['error'] = 'You are not allowed to edit this profile';
+        header('Location: index.php');
+        return;
     }
 
     if (is_profiles_request()) {
