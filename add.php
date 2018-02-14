@@ -6,7 +6,7 @@
         if (is_ok_field_size()) {
             $_SESSION['error'] = 'All fields are required';
             return;
-        } else if (!empty($_POST['image_url'] && !url_exists($_POST['image_url'])) {
+        } else if (!empty($_POST['image_url']) && !url_exists($_POST['image_url'])) {
             $_SESSION['error'] = 'Invalid URL';
             return;
         } else if (!is_valid_email($_POST['email'])) {
