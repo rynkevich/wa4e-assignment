@@ -65,41 +65,41 @@
 <html>
 
 <head>
-    <title>Arseni Rynkevich - Resume Registry, Log In</title>
-    <?php require_once 'include/bootstrap.php'; ?>
-    <script src="js/validation.js"></script>
+  <title>Arseni Rynkevich - Resume Registry, Log In</title>
+  <?php require_once 'include/bootstrap.php'; ?>
+  <script src="js/validation.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Please Log In</h1>
-        <?php
-            if (isset($_SESSION['error'])) {
-                echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
-                unset($_SESSION['error']);
-            }
-        ?>
-        <form method="POST">
-            <p>
-                <label for="edt_username">User Name</label>
-                <input type="text" name="email" id="edt_username" width="60">
-            </p>
-            <p>
-                <label for="edt_password">Password</label>
-                <input type="password" name="pass" id="edt_password" width="60">
-            </p>
-            <p>
-                <input type="submit" onclick="return validateUserData();" value="Log In">
-                <input type="submit" name="cancel" value="Cancel">
-            </p>
-        </form>
-        <p>For a password hint, view source and find an account and password hint in the HTML comments.</p>
-        <!-- Hint:
-        The account is umsi@umich.edu
-        The password is the three character name of the
-        programming language used in this class (all lower case)
-        followed by 123. -->
-    </div>
+  <div class="container">
+    <h1>Please Log In</h1>
+    <?php
+        if (isset($_SESSION['error'])) {
+            echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
+            unset($_SESSION['error']);
+        }
+    ?>
+    <form method="POST">
+      <p>
+        <label for="edt_username">User Name</label>
+        <input type="text" name="email" id="edt_username" width="60">
+      </p>
+      <p>
+        <label for="edt_password">Password</label>
+        <input type="password" name="pass" id="edt_password" width="60">
+      </p>
+      <p>
+        <input type="submit" onclick="return validateUserData();" value="Log In">
+        <input type="submit" name="cancel" value="Cancel">
+      </p>
+    </form>
+    <p>For a password hint, view source and find an account and password hint in the HTML comments.</p>
+    <!-- Hint:
+    The account is umsi@umich.edu
+    The password is the three character name of the
+    programming language used in this class (all lower case)
+    followed by 123. -->
+  </div>
 </body>
 
 </html>

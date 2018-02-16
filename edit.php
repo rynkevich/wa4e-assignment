@@ -69,48 +69,48 @@
 <html>
 
 <head>
-    <title>Arseni Rynkevich - Resume Registry, Edit Profile</title>
-    <?php require_once 'include/bootstrap.php'; ?>
+  <title>Arseni Rynkevich - Resume Registry, Edit Profile</title>
+  <?php require_once 'include/bootstrap.php'; ?>
 </head>
 
 <body>
-    <div class='container'>
-        <h1>Editing Profile for <?php echo htmlentities($_SESSION['name']) ?></h1>
-        <?php
-            if (isset($_SESSION['error'])) {
-                echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
-                unset($_SESSION['error']);
-            }
-        ?>
-        <form method="POST">
-            <p>
-                <label for="edt_first">First Name:</label>
-                <input type="text" name="first_name" id="edt_first" value="<?= htmlentities($profile['first_name']); ?>">
-            </p>
-            <p>
-                <label for="edt_last">Last Name:</label>
-                <input type="text" name="last_name" id="edt_last" value="<?= htmlentities($profile['last_name']); ?>">
-            </p>
-            <p>
-                <label for="edt_image_url">Image URL:</label>
-                <input type="text" name="image_url" id="edt_image_url" value="<?= $profile['image_url'] == NO_IMG_AVA ? '' : htmlentities($profile['image_url']); ?>">
-            </p>
-            <p>
-                <label for="edt_email">Email:</label>
-                <input type="text" name="email" id="edt_email" value="<?= htmlentities($profile['email']); ?>">
-            </p>
-            <p>
-                <label for="edt_headline">Headline:</label>
-                <input type="text" name="headline" id="edt_headline" value="<?= htmlentities($profile['headline']); ?>">
-            </p>
-            <p><label for="txt_summary">Summary:</label></p>
-            <p><textarea name="summary" rows="8" cols="80" id="txt_summary"><?= htmlentities($profile['summary']); ?></textarea></p>
-            <p>
-                <input type="submit" value="Save">
-                <input type="submit" name="cancel" value="Cancel">
-            </p>
-        </form>
-    </div>
+  <div class='container'>
+    <h1>Editing Profile for <?php echo htmlentities($_SESSION['name']) ?></h1>
+    <?php
+        if (isset($_SESSION['error'])) {
+            echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
+            unset($_SESSION['error']);
+        }
+    ?>
+    <form method="POST">
+      <p>
+        <label for="edt_first">First Name:</label>
+        <input type="text" name="first_name" id="edt_first" value="<?= htmlentities($profile['first_name']); ?>">
+      </p>
+      <p>
+        <label for="edt_last">Last Name:</label>
+        <input type="text" name="last_name" id="edt_last" value="<?= htmlentities($profile['last_name']); ?>">
+      </p>
+      <p>
+        <label for="edt_image_url">Image URL:</label>
+        <input type="text" name="image_url" id="edt_image_url" value="<?= $profile['image_url'] == NO_IMG_AVA ? '' : htmlentities($profile['image_url']); ?>">
+      </p>
+      <p>
+        <label for="edt_email">Email:</label>
+        <input type="text" name="email" id="edt_email" value="<?= htmlentities($profile['email']); ?>">
+      </p>
+      <p>
+        <label for="edt_headline">Headline:</label>
+        <input type="text" name="headline" id="edt_headline" value="<?= htmlentities($profile['headline']); ?>">
+      </p>
+      <p><label for="txt_summary">Summary:</label></p>
+      <p><textarea name="summary" rows="8" cols="80" id="txt_summary"><?= htmlentities($profile['summary']); ?></textarea></p>
+      <p>
+        <input type="submit" value="Save">
+        <input type="submit" name="cancel" value="Cancel">
+      </p>
+    </form>
+  </div>
 </body>
 
 </html>

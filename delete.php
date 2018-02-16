@@ -38,20 +38,20 @@
 <html>
 
 <head>
-    <title>Arseni Rynkevich - Resume Registry, Delete Profile</title>
-    <?php require_once 'include/bootstrap.php'; ?>
+  <title>Arseni Rynkevich - Resume Registry, Delete Profile</title>
+  <?php require_once 'include/bootstrap.php'; ?>
 </head>
 
 <body>
-    <div class='container'>
-        <h1>Deleteing Profile</h1>
-        <p><b>First Name:</b> <?= htmlentities($profile['first_name']); ?></p>
-        <p><b>Last Name:</b> <?= htmlentities($profile['last_name']); ?></p>
-        <form method="POST">
-            <input type="submit" name="delete" value="Delete">
-            <input type="submit" name="cancel" value="Cancel">
-        </form>
-    </div>
+  <div class='container'>
+    <h1>Deleteing Profile</h1>
+    <p><b>First Name:</b> <?= htmlentities($profile['first_name']); ?></p>
+    <p><b>Last Name:</b> <?= htmlentities($profile['last_name']); ?></p>
+    <form method="POST">
+      <input type="submit" name="delete" value="Delete">
+      <input type="submit" name="cancel" value="Cancel">
+    </form>
+  </div>
 </body>
 
 </html>

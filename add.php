@@ -55,48 +55,48 @@
 <html>
 
 <head>
-    <title>Arseni Rynkevich - Resume Registry, Add New</title>
-    <?php require_once 'include/bootstrap.php'; ?>
+  <title>Arseni Rynkevich - Resume Registry, Add New</title>
+  <?php require_once 'include/bootstrap.php'; ?>
 </head>
 
 <body>
-    <div class='container'>
-        <h1>Adding Profile for <?php echo htmlentities($_SESSION['name']) ?></h1>
-        <?php
-            if (isset($_SESSION['error'])) {
-                echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
-                unset($_SESSION['error']);
-            }
-        ?>
-        <form method="POST">
-            <p>
-                <label for="edt_first">First Name:</label>
-                <input type="text" name="first_name" id="edt_first">
-            </p>
-            <p>
-                <label for="edt_last">Last Name:</label>
-                <input type="text" name="last_name" id="edt_last">
-            </p>
-            <p>
-                <label for="edt_image_url">Image URL:</label>
-                <input type="text" name="image_url" id="edt_image_url">
-            </p>
-            <p>
-                <label for="edt_email">Email:</label>
-                <input type="text" name="email" id="edt_email">
-            </p>
-            <p>
-                <label for="edt_headline">Headline:</label>
-                <input type="text" name="headline" id="edt_headline">
-            </p>
-            <p><label for="txt_summary">Summary:</label></p>
-            <p><textarea name="summary" rows="8" cols="80" id="txt_summary"></textarea></p>
-            <p>
-                <input type="submit" value="Add">
-                <input type="submit" name="cancel" value="Cancel">
-            </p>
-        </form>
-    </div>
+  <div class='container'>
+    <h1>Adding Profile for <?php echo htmlentities($_SESSION['name']) ?></h1>
+    <?php
+        if (isset($_SESSION['error'])) {
+            echo '<p style="color: red;">' . $_SESSION['error'] . '</p>';
+            unset($_SESSION['error']);
+        }
+    ?>
+    <form method="POST">
+      <p>
+        <label for="edt_first">First Name:</label>
+        <input type="text" name="first_name" id="edt_first">
+      </p>
+      <p>
+        <label for="edt_last">Last Name:</label>
+        <input type="text" name="last_name" id="edt_last">
+      </p>
+      <p>
+        <label for="edt_image_url">Image URL:</label>
+        <input type="text" name="image_url" id="edt_image_url">
+      </p>
+      <p>
+        <label for="edt_email">Email:</label>
+        <input type="text" name="email" id="edt_email">
+      </p>
+      <p>
+        <label for="edt_headline">Headline:</label>
+        <input type="text" name="headline" id="edt_headline">
+      </p>
+      <p><label for="txt_summary">Summary:</label></p>
+        <p><textarea name="summary" rows="8" cols="80" id="txt_summary"></textarea></p>
+        <p>
+          <input type="submit" value="Add">
+          <input type="submit" name="cancel" value="Cancel">
+        </p>
+    </form>
+  </div>
 </body>
 
 </html>

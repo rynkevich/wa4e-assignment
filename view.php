@@ -19,23 +19,23 @@
 <html>
 
 <head>
-    <title>Arseni Rynkevich - Resume Registry, View Profile</title>
-    <?php require_once 'include/bootstrap.php'; ?>
+  <title>Arseni Rynkevich - Resume Registry, View Profile</title>
+  <?php require_once 'include/bootstrap.php'; ?>
 </head>
 
 <body>
-    <div class='container'>
-        <h1>Profile Information</h1>
-        <p><?= '<img src="' . get_profile_image_url($profile) . '" class="img-rounded" width="150">' ?></p>
-        <p><b>First Name:</b> <?= htmlentities($profile['first_name']); ?></p>
-        <p><b>Last Name:</b> <?= htmlentities($profile['last_name']); ?></p>
-        <p><b>Email:</b> <?= htmlentities($profile['email']); ?></p>
-        <p><b>Headline:</b></p>
-        <p><?= htmlentities($profile['headline']); ?></p>
-        <p><b>Summary:</b></p>
-        <p><?= htmlentities($profile['summary']); ?></p>
-        <p><a href="/index.php">Done</a></p>
-    </div>
+  <div class='container'>
+    <h1>Profile Information</h1>
+    <p><?= '<img src="' . get_profile_image_url($profile) . '" class="img-rounded" width="150">' ?></p>
+    <p><b>First Name:</b> <?= htmlentities($profile['first_name']); ?></p>
+    <p><b>Last Name:</b> <?= htmlentities($profile['last_name']); ?></p>
+    <p><b>Email:</b> <?= htmlentities($profile['email']); ?></p>
+    <p><b>Headline:</b></p>
+    <p><?= htmlentities($profile['headline']); ?></p>
+    <p><b>Summary:</b></p>
+    <p><?= htmlentities($profile['summary']); ?></p>
+    <p><a href="/index.php">Done</a></p>
+  </div>
 </body>
 
 </html>
