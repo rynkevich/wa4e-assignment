@@ -1,7 +1,7 @@
 <?php
-    require_once('include/pdo.php');
-    require_once('include/common.php');
-    require_once('include/errors.php');
+    require_once 'include/pdo.php';
+    require_once 'include/common.php';
+    require_once 'include/errors.php';
 
     function login() {
         if (strlen($_POST['email']) < 1 || strlen($_POST['pass']) < 1) {

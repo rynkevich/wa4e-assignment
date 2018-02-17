@@ -1,7 +1,7 @@
 <?php
-    require_once('include/pdo.php');
-    require_once('include/common.php');
-    require_once('include/errors.php');
+    require_once 'include/pdo.php';
+    require_once 'include/common.php';
+    require_once 'include/errors.php';
 
     function get_profile_image_url($profile) {
         return $profile['image_url'] ? htmlentities($profile['image_url']) : NO_IMG_AVA;

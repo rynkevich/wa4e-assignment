@@ -1,8 +1,8 @@
 <?php
-    require_once('include/pdo.php');
-    require_once('include/common.php');
-    require_once('include/errors.php');
-    require_once('include/position_queries.php');
+    require_once 'include/pdo.php';
+    require_once 'include/common.php';
+    require_once 'include/errors.php';
+    require_once 'include/position_queries.php';
 
     function edit_entry() {
         if (!is_ok_field_size()) {

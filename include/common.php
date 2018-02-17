@@ -1,6 +1,6 @@
 <?php
-    require_once('include/pdo.php');
-    require_once('include/errors.php');
+    require_once 'include/pdo.php';
+    require_once 'include/errors.php';
 
     define('NO_IMG_AVA', 'img/no-image.png');
     define('MAX_POS_ENTRIES', 9);

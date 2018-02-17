@@ -1,6 +1,6 @@
 <?php
-    require_once('include/pdo.php');
-    require_once('include/common.php');
+    require_once 'include/pdo.php';
+    require_once 'include/common.php';
 
     function show_registry() {
         global $pdo;
