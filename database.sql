@@ -1,8 +1,8 @@
-CREATE DATABASE ResumeRegistry DEFAULT CHARACTER SET utf8;
-USE ResumeRegistry;
+CREATE DATABASE resume_registry DEFAULT CHARACTER SET utf8;
+USE resume_registry;
 
-GRANT ALL ON ResumeRegistry.* TO 'application'@'localhost' IDENTIFIED BY 'Pa$$w0rD';
-GRANT ALL ON ResumeRegistry.* TO 'application'@'127.0.0.1' IDENTIFIED BY 'Pa$$w0rD';
+GRANT ALL ON resume_registry.* TO 'application'@'localhost' IDENTIFIED BY 'Pa$$w0rD';
+GRANT ALL ON resume_registry.* TO 'application'@'127.0.0.1' IDENTIFIED BY 'Pa$$w0rD';
 
 CREATE TABLE users (
 	user_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -10,12 +10,12 @@ CREATE TABLE users (
 	email VARCHAR(128),
 	`password` VARCHAR(128),
 
-	PRIMARY KEY(user_id),
-	INDEX(email),
-    INDEX(`password`)
+	PRIMARY KEY (user_id),
+	INDEX (email),
+    INDEX (`password`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE profile (
+CREATE TABLE profiles (
     profile_id INTEGER NOT NULL AUTO_INCREMENT,
     user_id INTEGER NOT NULL,
     image_url TEXT,
@@ -25,9 +25,8 @@ CREATE TABLE profile (
     headline TEXT,
     summary TEXT,
 
-    PRIMARY KEY(profile_id),
-    CONSTRAINT profile_ibfk_2 FOREIGN KEY (user_id)
-        REFERENCES users (user_id)
+    PRIMARY KEY (profile_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
