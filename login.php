@@ -1,13 +1,14 @@
 <?php
-    require_once('include/common.php');
     require_once('include/pdo.php');
+    require_once('include/common.php');
+    require_once('include/errors.php');
 
     function login() {
         if (strlen($_POST['email']) < 1 || strlen($_POST['pass']) < 1) {
-            $_SESSION['error'] = 'User name and password are required';
+            $_SESSION['error'] = E_SIGNIN_BLANK_FIELD;
             return;
         } else if (!is_valid_email($_POST['email'])) {
-            $_SESSION['error'] = 'Email must have an at-sign (@)';
+            $_SESSION['error'] = E_INVALID_EMAIL;
             return;
         }
 

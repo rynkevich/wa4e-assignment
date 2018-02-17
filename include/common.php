@@ -1,5 +1,6 @@
 <?php
-    require_once('pdo.php');
+    require_once('include/pdo.php');
+    require_once('include/errors.php');
 
     define('NO_IMG_AVA', 'img/no-image.png');
     define('MAX_POS_ENTRIES', 9);
@@ -41,7 +42,7 @@
     }
 
     function is_ok_field_size() {
-        return !(strlen($_POST['first_name']) > 1 && strlen($_POST['last_name']) > 1 &&
+        return (strlen($_POST['first_name']) > 1 && strlen($_POST['last_name']) > 1 &&
             strlen($_POST['email']) > 1 && strlen($_POST['headline']) > 1 &&
             strlen($_POST['summary']) > 1);
     }
@@ -55,11 +56,11 @@
         for ($pos = 1; $pos <= MAX_POS_ENTRIES; $pos++) {
             if (isset($_POST['year' . $pos]) && isset($_POST['desc' . $pos])) {
                 if (strlen($_POST['year' . $pos]) < 1 || strlen($_POST['desc' . $pos]) < 1) {
-                    $_SESSION['error'] = 'Image URL is optional, all other fields are required';
+                    $_SESSION['error'] = E_PROFILE_BLANK_FIELD;
                     return false;
                 }
                 if (!is_numeric($_POST['year' . $pos])) {
-                    $_SESSION['error'] = 'Position year must be numeric';
+                    $_SESSION['error'] = E_NON_NUMERIC_POSITION;
                     return false;
                 }
             }

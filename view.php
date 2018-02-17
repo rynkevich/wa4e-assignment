@@ -1,6 +1,7 @@
 <?php
     require_once('include/pdo.php');
     require_once('include/common.php');
+    require_once('include/errors.php');
 
     function get_profile_image_url($profile) {
         return $profile['image_url'] ? htmlentities($profile['image_url']) : NO_IMG_AVA;
@@ -24,7 +25,7 @@
     session_start();
 
     if (!($profile = get_profile_data())) {
-        $_SESSION['error'] = 'Could not load profile';
+        $_SESSION['error'] = E_INVALID_PROFILE_ID;
         header('Location: index.php');
         return;
     }

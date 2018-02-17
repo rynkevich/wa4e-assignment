@@ -1,6 +1,7 @@
 <?php
     require_once('include/pdo.php');
     require_once('include/common.php');
+    require_once('include/errors.php');
 
     session_start();
 
@@ -14,13 +15,13 @@
     }
 
     if (!($profile = get_profile_data())) {
-        $_SESSION['error'] = 'Could not load profile';
+        $_SESSION['error'] = E_INVALID_PROFILE_ID;
         header('Location: index.php');
         return;
     }
 
     if ($_SESSION['user_id'] != $profile['user_id']) {
-        $_SESSION['error'] = 'You are not allowed to delete this profile';
+        $_SESSION['error'] = E_NO_PRIVILEGES_TO_DELETE;
         header('Location: index.php');
         return;
     }

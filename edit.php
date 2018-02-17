@@ -1,17 +1,18 @@
 <?php
     require_once('include/pdo.php');
     require_once('include/common.php');
+    require_once('include/errors.php');
     require_once('include/position_queries.php');
 
     function edit_entry() {
         if (is_ok_field_size()) {
-            $_SESSION['error'] = 'Image URL is optional, all other fields are required';
+            $_SESSION['error'] = E_PROFILE_BLANK_FIELD;
             return;
         } else if (!empty($_POST['image_url']) && !url_exists($_POST['image_url'])) {
-            $_SESSION['error'] = 'Invalid URL';
+            $_SESSION['error'] = E_INVALID_URL;
             return;
         } else if (!is_valid_email($_POST['email'])) {
-            $_SESSION['error'] = 'Email address must contain @';
+            $_SESSION['error'] = E_INVALID_EMAIL;
             return;
         } else if (!validate_positions()) {
             return;
@@ -104,7 +105,7 @@
     }
 
     if ($_SESSION['user_id'] != $profile['user_id']) {
-        $_SESSION['error'] = 'You are not allowed to edit this profile';
+        $_SESSION['error'] = E_NO_PRIVILEGES_TO_EDIT;
         header('Location: index.php');
         return;
     }
