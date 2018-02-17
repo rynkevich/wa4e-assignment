@@ -5,7 +5,7 @@
     require_once('include/position_queries.php');
 
     function edit_entry() {
-        if (is_ok_field_size()) {
+        if (!is_ok_field_size()) {
             $_SESSION['error'] = E_PROFILE_BLANK_FIELD;
             return;
         } else if (!empty($_POST['image_url']) && !url_exists($_POST['image_url'])) {
