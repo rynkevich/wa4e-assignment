@@ -15,7 +15,7 @@
         }
 
         global $pdo;
-        $stmt = $pdo->prepare('INSERT INTO profile (user_id, image_url, first_name, last_name,
+        $stmt = $pdo->prepare('INSERT INTO profiles (user_id, image_url, first_name, last_name,
             email, headline, summary) VALUES (:uid, :img, :first, :last, :em, :hl, :sum)');
         $stmt->execute(array(
             ':uid' => $_SESSION['user_id'],

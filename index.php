@@ -5,7 +5,7 @@
     function show_registry() {
         global $pdo;
 
-        $selection = $pdo->query('SELECT first_name, last_name, headline, profile_id FROM profile');
+        $selection = $pdo->query('SELECT first_name, last_name, headline, profile_id FROM profiles');
 
         if ($profile = $selection->fetch(PDO::FETCH_ASSOC)) {
             echo '<table border="1">';

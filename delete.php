@@ -26,7 +26,7 @@
     }
 
     if (isset($_POST['delete'])) {
-        $stmt = $pdo->prepare('DELETE FROM profile WHERE profile_id = :id');
+        $stmt = $pdo->prepare('DELETE FROM profiles WHERE profile_id = :id');
         $stmt->execute(array(':id' => $_REQUEST['profile_id']));
         $_SESSION['success'] = 'Profile deleted';
         header('Location: index.php');

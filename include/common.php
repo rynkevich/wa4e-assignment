@@ -25,7 +25,7 @@
     function get_profile_data() {
         global $pdo;
 
-        $selection = $pdo->prepare('SELECT * FROM profile WHERE profile_id = :id');
+        $selection = $pdo->prepare('SELECT * FROM profiles WHERE profile_id = :id');
         $selection->execute(array(':id' => $_REQUEST['profile_id']));
         return $selection->fetch(PDO::FETCH_ASSOC);
     }

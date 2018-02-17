@@ -15,7 +15,7 @@
         }
 
         global $pdo;
-        $stmt = $pdo->prepare('UPDATE profile SET user_id = :uid, image_url = :img,
+        $stmt = $pdo->prepare('UPDATE profiles SET user_id = :uid, image_url = :img,
             first_name = :first, last_name = :last, email = :em, headline = :hl, summary = :sum
             WHERE profile_id = :id');
         $stmt->execute(array(
