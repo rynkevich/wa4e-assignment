@@ -126,7 +126,7 @@
 
 <head>
   <title>Arseni Rynkevich - Resume Registry, Edit Profile</title>
-  <?php require_once 'include/bootstrap.php'; ?>
+  <?php require_once 'styles/bootstrap.php'; ?>
   <?php require_once 'include/inc_jquery.php'; ?>
   <script src="js/position-handler.js"></script>
 </head>

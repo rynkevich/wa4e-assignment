@@ -67,7 +67,7 @@
 
 <head>
   <title>Arseni Rynkevich - Resume Registry, Log In</title>
-  <?php require_once 'include/bootstrap.php'; ?>
+  <?php require_once 'styles/bootstrap.php'; ?>
   <script src="js/validation.js"></script>
 </head>
 

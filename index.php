@@ -41,7 +41,7 @@
 
 <head>
   <title>Arseni Rynkevich - Resume Registry</title>
-  <?php require_once 'include/bootstrap.php'; ?>
+  <?php require_once 'styles/bootstrap.php'; ?>
 </head>
 
 <body>
