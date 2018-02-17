@@ -1,4 +1,6 @@
 <?php
+    require_once 'include/pdo.php';
+
     function sql_update_position($id, $yr, $desc, $posid) {
         global $pdo;
 
