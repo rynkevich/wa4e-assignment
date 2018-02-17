@@ -6,6 +6,21 @@
         return $profile['image_url'] ? htmlentities($profile['image_url']) : NO_IMG_AVA;
     }
 
+    function show_positions($profile_id) {
+        $positions = get_profile_positions($profile_id);
+
+        $position = $positions->fetch(PDO::FETCH_ASSOC);
+        if ($position) {
+            echo '<label>Positions:</label>';
+            echo '<ul>';
+            do {
+                echo '<li>' . htmlentities($position['year']) . ': ' .
+                    htmlentities($position['description']) . '</li>';
+            } while ($position = $positions->fetch(PDO::FETCH_ASSOC));
+            echo '</ul>';
+        }
+    }
+
     session_start();
 
     if (!($profile = get_profile_data())) {
@@ -34,6 +49,7 @@
     <p><?= htmlentities($profile['headline']); ?></p>
     <p><b>Summary:</b></p>
     <p><?= htmlentities($profile['summary']); ?></p>
+    <?php show_positions($profile['profile_id']); ?>
     <p><a href="/index.php">Done</a></p>
   </div>
 </body>

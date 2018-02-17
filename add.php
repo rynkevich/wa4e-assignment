@@ -1,16 +1,19 @@
 <?php
     require_once('include/pdo.php');
     require_once('include/common.php');
+    require_once('include/position_queries.php');
 
     function add_entry() {
         if (is_ok_field_size()) {
-            $_SESSION['error'] = 'All fields are required';
+            $_SESSION['error'] = 'Image URL is optional, all other fields are required';
             return;
         } else if (!empty($_POST['image_url']) && !url_exists($_POST['image_url'])) {
             $_SESSION['error'] = 'Invalid URL';
             return;
         } else if (!is_valid_email($_POST['email'])) {
             $_SESSION['error'] = 'Email address must contain @';
+            return;
+        } else if (!validate_positions()) {
             return;
         }
 
@@ -26,7 +29,17 @@
             ':hl' => $_POST['headline'],
             ':sum' => $_POST['summary'])
         );
+        $profile_id = $pdo->lastInsertId();
+        insert_positions($profile_id);
         $_SESSION['success'] = 'Profile added';
+    }
+
+    function insert_positions($profile_id) {
+        for ($pos = 1; $pos <= MAX_POS_ENTRIES; $pos++) {
+            if (isset($_POST['year' . $pos]) && isset($_POST['desc' . $pos])) {
+                sql_insert_position($profile_id, $_POST['year' . $pos], $_POST['desc' . $pos]);
+            }
+        }
     }
 
     session_start();
@@ -57,6 +70,8 @@
 <head>
   <title>Arseni Rynkevich - Resume Registry, Add New</title>
   <?php require_once 'include/bootstrap.php'; ?>
+  <?php require_once 'include/inc_jquery.php'; ?>
+  <script src="js/position-handler.js"></script>
 </head>
 
 <body>
@@ -90,11 +105,19 @@
         <input type="text" name="headline" id="edt_headline">
       </p>
       <p><label for="txt_summary">Summary:</label></p>
-        <p><textarea name="summary" rows="8" cols="80" id="txt_summary"></textarea></p>
+      <p><textarea name="summary" rows="8" cols="80" id="txt_summary"></textarea></p>
+      <div id="blck_positions">
         <p>
-          <input type="submit" value="Add">
-          <input type="submit" name="cancel" value="Cancel">
+          <label for="btn_add_position">Position:</label>
+          <input type="button" id="btn_add_position" value="+" onclick="addPositionField();">
+          <input type="hidden" id="hint_max_pos_entries" value="<?= MAX_POS_ENTRIES ?>">
+          <input type="hidden" id="hint_initial_pos_entries_count" value="0">
         </p>
+      </div>
+      <p>
+        <input type="submit" value="Add">
+        <input type="submit" name="cancel" value="Cancel">
+      </p>
     </form>
   </div>
 </body>
