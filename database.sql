@@ -30,6 +30,18 @@ CREATE TABLE profiles (
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
+CREATE TABLE positions (
+    position_id INTEGER NOT NULL AUTO_INCREMENT,
+    profile_id INTEGER,
+    rank INTEGER,
+    `year` INTEGER,
+    description TEXT,
+
+    PRIMARY KEY (position_id),
+    FOREIGN KEY (profile_id) REFERENCES profiles (profile_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB;
+
 INSERT INTO users (name, email, `password`)
     VALUES ('UMSI', 'umsi@umich.edu', '1a52e17fa899cf40fb04cfc42e6352f1');
 INSERT INTO users (name, email, `password`)
