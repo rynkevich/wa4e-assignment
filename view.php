@@ -22,6 +22,22 @@
         }
     }
 
+    function show_education($profile_id) {
+        $education_full = get_profile_education($profile_id);
+
+        $education = $education_full->fetch(PDO::FETCH_ASSOC);
+        if ($education) {
+            echo '<label>Education:</label>';
+            echo '<ul>';
+            do {
+                echo '<li>' . htmlentities($education['year']) . ': ' .
+                    htmlentities(get_inst_name($education['institution_id'])) .
+                    '</li>';
+            } while ($education = $education_full->fetch(PDO::FETCH_ASSOC));
+            echo '</ul>';
+        }
+    }
+
     session_start();
 
     if (!($profile = get_profile_data())) {
@@ -50,6 +66,7 @@
     <p><?= htmlentities($profile['headline']); ?></p>
     <p><b>Summary:</b></p>
     <p><?= htmlentities($profile['summary']); ?></p>
+    <?php show_education($profile['profile_id']); ?>
     <?php show_positions($profile['profile_id']); ?>
     <p><a href="/index.php">Done</a></p>
   </div>

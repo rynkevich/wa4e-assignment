@@ -4,9 +4,11 @@
 
     define('NO_IMG_AVA', 'img/no-image.png');
     define('MAX_POS_ENTRIES', 9);
-    define('SQL_SELECT_PROFILE_BY_ID', 'SELECT * FROM profiles WHERE profile_id = :id');
-    define('SQL_SELECT_POSITIONS_BY_ID', 'SELECT * FROM positions WHERE profile_id = :id');
-    
+    define('SQL_SELECT_PROFILE_BY_PROFID', 'SELECT * FROM profiles WHERE profile_id = :id');
+    define('SQL_SELECT_POSITIONS_BY_PROFID', 'SELECT * FROM positions WHERE profile_id = :id');
+    define('SQL_SELECT_EDUCATION_BY_PROFID', 'SELECT * FROM education WHERE profile_id = :id');
+    define('SQL_SELECT_INSTNAME_BY_INSTID', 'SELECT name FROM institution WHERE institution_id = :id');
+
     function is_logged() {
         return isset($_SESSION['name']) && isset($_SESSION['user_id']);
     }
@@ -36,13 +38,23 @@
     }
 
     function get_profile_data() {
-        return sql_select(SQL_SELECT_PROFILE_BY_ID,
+        return sql_select(SQL_SELECT_PROFILE_BY_PROFID,
             array(':id' => $_REQUEST['profile_id']))->fetch(PDO::FETCH_ASSOC);
     }
 
     function get_profile_positions($profile_id) {
-        return sql_select(SQL_SELECT_POSITIONS_BY_ID,
+        return sql_select(SQL_SELECT_POSITIONS_BY_PROFID,
             array(':id' => $profile_id));
+    }
+
+    function get_profile_education($profile_id) {
+        return sql_select(SQL_SELECT_EDUCATION_BY_PROFID,
+            array(':id' => $profile_id));
+    }
+
+    function get_inst_name($institution_id) {
+        return sql_select(SQL_SELECT_INSTNAME_BY_INSTID,
+            array(':id' => $institution_id))->fetch(PDO::FETCH_ASSOC)['name'];
     }
 
     function is_ok_field_size() {
