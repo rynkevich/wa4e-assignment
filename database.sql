@@ -42,7 +42,39 @@ CREATE TABLE positions (
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
+CREATE TABLE institution (
+	institution_id INTEGER NOT NULL AUTO_INCREMENT,
+	name VARCHAR(255),
+
+	UNIQUE (name),
+    PRIMARY KEY (institution_id)
+) ENGINE=InnoDB;
+
+CREATE TABLE education (
+    profile_id INTEGER,
+    institution_id INTEGER,
+    rank INTEGER,
+    year INTEGER,
+
+    FOREIGN KEY (profile_id) REFERENCES profiles (profile_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (institution_id) REFERENCES institution (institution_id)
+		ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(profile_id, institution_id)
+
+) ENGINE=InnoDB;
+
 INSERT INTO users (name, email, `password`)
     VALUES ('UMSI', 'umsi@umich.edu', '1a52e17fa899cf40fb04cfc42e6352f1');
 INSERT INTO users (name, email, `password`)
     VALUES ('Chuck', 'csev@umich.edu', '1a52e17fa899cf40fb04cfc42e6352f1');
+
+INSERT INTO institution (name) VALUES ('University of Michigan');
+INSERT INTO institution (name) VALUES ('University of Virginia');
+INSERT INTO institution (name) VALUES ('University of Oxford');
+INSERT INTO institution (name) VALUES ('University of Cambridge');
+INSERT INTO institution (name) VALUES ('Stanford University');
+INSERT INTO institution (name) VALUES ('Duke University');
+INSERT INTO institution (name) VALUES ('Michigan State University');
+INSERT INTO institution (name) VALUES ('Mississippi State University');
+INSERT INTO institution (name) VALUES ('Montana State University');
