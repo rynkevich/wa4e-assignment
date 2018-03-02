@@ -4,7 +4,9 @@
 
     define('NO_IMG_AVA', 'img/no-image.png');
     define('MAX_POS_ENTRIES', 9);
-
+    define('SQL_SELECT_PROFILE_BY_ID', 'SELECT * FROM profiles WHERE profile_id = :id');
+    define('SQL_SELECT_POSITIONS_BY_ID', 'SELECT * FROM positions WHERE profile_id = :id');
+    
     function is_logged() {
         return isset($_SESSION['name']) && isset($_SESSION['user_id']);
     }
@@ -24,21 +26,23 @@
         return $retcode == 200;
     }
 
-    function get_profile_data() {
+    function sql_select($query, $substitutions) {
         global $pdo;
 
-        $selection = $pdo->prepare('SELECT * FROM profiles WHERE profile_id = :id');
-        $selection->execute(array(':id' => $_REQUEST['profile_id']));
-        return $selection->fetch(PDO::FETCH_ASSOC);
+        $selection = $pdo->prepare($query);
+        $selection->execute($substitutions);
+
+        return $selection;
+    }
+
+    function get_profile_data() {
+        return sql_select(SQL_SELECT_PROFILE_BY_ID,
+            array(':id' => $_REQUEST['profile_id']))->fetch(PDO::FETCH_ASSOC);
     }
 
     function get_profile_positions($profile_id) {
-        global $pdo;
-
-        $selection = $pdo->prepare('SELECT * FROM positions WHERE profile_id = :id');
-        $selection->execute(array(':id' => $profile_id));
-
-        return $selection;
+        return sql_select(SQL_SELECT_POSITIONS_BY_ID,
+            array(':id' => $profile_id));
     }
 
     function is_ok_field_size() {
