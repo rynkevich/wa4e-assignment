@@ -70,7 +70,7 @@
 
 <head>
   <title>Arseni Rynkevich - Resume Registry, Add New</title>
-  <?php require_once 'styles/bootstrap.php'; ?>
+  <?php require_once 'styles/inc_styles.php'; ?>
   <?php require_once 'include/inc_jquery.php'; ?>
   <script src="js/position-handler.js"></script>
 </head>

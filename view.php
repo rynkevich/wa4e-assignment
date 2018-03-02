@@ -36,7 +36,7 @@
 
 <head>
   <title>Arseni Rynkevich - Resume Registry, View Profile</title>
-  <?php require_once 'styles/bootstrap.php'; ?>
+  <?php require_once 'styles/inc_styles.php'; ?>
 </head>
 
 <body>
