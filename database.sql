@@ -48,21 +48,21 @@ CREATE TABLE institution (
 
 	UNIQUE (name),
     PRIMARY KEY (institution_id)
-) ENGINE=InnoDB;
+) ENGINE = InnoDB;
 
 CREATE TABLE education (
     profile_id INTEGER,
     institution_id INTEGER,
     rank INTEGER,
-    year INTEGER,
+    `year` INTEGER,
 
     FOREIGN KEY (profile_id) REFERENCES profiles (profile_id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (institution_id) REFERENCES institution (institution_id)
 		ON DELETE CASCADE ON UPDATE CASCADE,
-	PRIMARY KEY(profile_id, institution_id)
+	PRIMARY KEY (profile_id, institution_id)
 
-) ENGINE=InnoDB;
+) ENGINE = InnoDB;
 
 INSERT INTO users (name, email, `password`)
     VALUES ('UMSI', 'umsi@umich.edu', '1a52e17fa899cf40fb04cfc42e6352f1');

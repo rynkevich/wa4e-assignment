@@ -2,13 +2,16 @@
     require_once 'include/pdo.php';
     require_once 'include/common.php';
     require_once 'include/errors.php';
+    require_once 'include/queries/profiles.php';
+    require_once 'include/queries/positions.php';
+    require_once 'include/queries/education.php';
 
     function get_profile_image_url($profile) {
         return $profile['image_url'] ? htmlentities($profile['image_url']) : NO_IMG_AVA;
     }
 
     function show_positions($profile_id) {
-        $positions = get_profile_positions($profile_id);
+        $positions = select_positions_by_profid($profile_id);
 
         $position = $positions->fetch(PDO::FETCH_ASSOC);
         if ($position) {
@@ -23,7 +26,7 @@
     }
 
     function show_education($profile_id) {
-        $education_full = get_profile_education($profile_id);
+        $education_full = select_education_by_profid($profile_id);
 
         $education = $education_full->fetch(PDO::FETCH_ASSOC);
         if ($education) {
@@ -31,7 +34,7 @@
             echo '<ul>';
             do {
                 echo '<li>' . htmlentities($education['year']) . ': ' .
-                    htmlentities(get_inst_name($education['institution_id'])) .
+                    htmlentities(select_instname_by_instid($education['institution_id'])) .
                     '</li>';
             } while ($education = $education_full->fetch(PDO::FETCH_ASSOC));
             echo '</ul>';
@@ -40,7 +43,7 @@
 
     session_start();
 
-    if (!($profile = get_profile_data())) {
+    if (!($profile = select_profile($_REQUEST['profile_id'] ?? ''))) {
         $_SESSION['error'] = E_INVALID_PROFILE_ID;
         header('Location: index.php');
         return;

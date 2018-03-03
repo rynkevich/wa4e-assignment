@@ -1,5 +1,6 @@
 <?php
     require_once 'include/pdo.php';
+    require_once 'include/queries/users.php';
     require_once 'include/common.php';
     require_once 'include/errors.php';
 
@@ -12,7 +13,7 @@
             return;
         }
 
-        $userdata = get_userdata($_POST['email'], $_POST['pass']);
+        $userdata = select_user($_POST['email'], get_hash($_POST['pass']));
         if (!$userdata) {
             $_SESSION['error'] = 'Incorrect password';
             error_log('Login fail ' . htmlentities($_POST['email']) . ' ' . get_hash($_POST['pass']));
@@ -21,20 +22,6 @@
             $_SESSION['user_id'] = $userdata['user_id'];
             error_log('Login success ' . htmlentities($_POST['email']));
         }
-    }
-
-    function get_userdata($email, $password) {
-        global $pdo;
-
-        $hash = get_hash($password);
-        $selection = $pdo->prepare('SELECT user_id, name FROM users
-            WHERE email = :em AND password = :pw');
-        $selection->execute(array(
-            ':em' => $email,
-            ':pw' => $hash)
-        );
-
-        return $selection->fetch(PDO::FETCH_ASSOC);
     }
 
     function get_hash($password) {
