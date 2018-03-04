@@ -5,8 +5,6 @@
         'SELECT user_id, name FROM users WHERE email = :em AND password = :pw');
 
     function select_user($email, $password) {
-        global $pdo;
-
         return pdo_query_s(SELECT_USER_BY_EMAIL_PASS,
             array(
                 ':em' => $email,

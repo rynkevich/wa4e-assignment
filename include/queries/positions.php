@@ -25,15 +25,11 @@
     }
 
     function delete_position($posid) {
-        global $pdo;
-
         pdo_query_s(SQL_DELETE_POSITION_BY_POSID,
             array(':posid' => $posid));
     }
 
     function insert_position($id, $yr, $desc) {
-        global $pdo;
-
         pdo_query_s(SQL_INSERT_NEW_POSITION,
             array(
                 ':profid' => $id,

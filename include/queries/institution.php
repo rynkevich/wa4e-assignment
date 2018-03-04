@@ -11,14 +11,10 @@
         'SELECT name FROM Institution WHERE name LIKE :prefix');
 
     function insert_institution($name) {
-        global $pdo;
-
         pdo_query_s(SQL_INSERT_NEW_INSTITUTION, array(':name' => $name));
     }
 
     function select_instid_by_instname($name) {
-        global $pdo;
-
         $result = pdo_query_s(SQL_SELECT_INSTID_BY_INSTNAME,
             array(':name' => $name))->fetch(PDO::FETCH_ASSOC);
 

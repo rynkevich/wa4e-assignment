@@ -15,8 +15,6 @@
         'SELECT * FROM education WHERE profile_id = :id');
 
     function update_education($school, $yr, $profid, $instid) {
-        global $pdo;
-
         if (!is_existing_inst($school)) {
             insert_institution($school);
         }
@@ -32,8 +30,6 @@
     }
 
     function delete_education($profid, $instid) {
-        global $pdo;
-
         pdo_query_s(SQL_DELETE_EDUCATION_BY_PROFID_INSTID,
             array(
                 ':profid' => $profid,
@@ -43,8 +39,6 @@
     }
 
     function insert_education($profid, $school, $yr) {
-        global $pdo;
-
         if (!is_existing_inst($school)) {
             insert_institution($school);
         }
