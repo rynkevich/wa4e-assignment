@@ -1,11 +1,12 @@
 <?php
     require_once 'include/pdo.php';
+    require_once 'include/queries/profiles.php';
     require_once 'include/common.php';
 
     function show_registry() {
         global $pdo;
 
-        $selection = $pdo->query('SELECT first_name, last_name, headline, profile_id FROM profiles');
+        $selection = select_profiles();
 
         if ($profile = $selection->fetch(PDO::FETCH_ASSOC)) {
             echo '<table border="1">';

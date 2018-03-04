@@ -1,7 +1,7 @@
 <?php
-    require_once 'include/pdo.php';
     require_once 'include/common.php';
     require_once 'include/errors.php';
+    require_once 'include/queries/profiles.php';
 
     session_start();
 
@@ -14,7 +14,7 @@
         die('ACCESS DENIED');
     }
 
-    if (!($profile = get_profile_data())) {
+    if (!($profile = select_profile($_REQUEST['profile_id']))) {
         $_SESSION['error'] = E_INVALID_PROFILE_ID;
         header('Location: index.php');
         return;
@@ -27,8 +27,7 @@
     }
 
     if (isset($_POST['delete'])) {
-        $stmt = $pdo->prepare('DELETE FROM profiles WHERE profile_id = :id');
-        $stmt->execute(array(':id' => $_REQUEST['profile_id']));
+        delete_profile($_REQUEST['profile_id'] ?? '');
         $_SESSION['success'] = 'Profile deleted';
         header('Location: index.php');
         return;

@@ -1,13 +1,9 @@
 <?php
-    require_once 'include/pdo.php';
     require_once 'include/errors.php';
 
     define('NO_IMG_AVA', 'img/no-image.png');
     define('MAX_POS_ENTRIES', 9);
-    define('SQL_SELECT_PROFILE_BY_PROFID', 'SELECT * FROM profiles WHERE profile_id = :id');
-    define('SQL_SELECT_POSITIONS_BY_PROFID', 'SELECT * FROM positions WHERE profile_id = :id');
-    define('SQL_SELECT_EDUCATION_BY_PROFID', 'SELECT * FROM education WHERE profile_id = :id');
-    define('SQL_SELECT_INSTNAME_BY_INSTID', 'SELECT name FROM institution WHERE institution_id = :id');
+    define('MAX_EDU_ENTRIES', 9);
 
     function is_logged() {
         return isset($_SESSION['name']) && isset($_SESSION['user_id']);
@@ -28,35 +24,6 @@
         return $retcode == 200;
     }
 
-    function sql_select($query, $substitutions) {
-        global $pdo;
-
-        $selection = $pdo->prepare($query);
-        $selection->execute($substitutions);
-
-        return $selection;
-    }
-
-    function get_profile_data() {
-        return sql_select(SQL_SELECT_PROFILE_BY_PROFID,
-            array(':id' => $_REQUEST['profile_id']))->fetch(PDO::FETCH_ASSOC);
-    }
-
-    function get_profile_positions($profile_id) {
-        return sql_select(SQL_SELECT_POSITIONS_BY_PROFID,
-            array(':id' => $profile_id));
-    }
-
-    function get_profile_education($profile_id) {
-        return sql_select(SQL_SELECT_EDUCATION_BY_PROFID,
-            array(':id' => $profile_id));
-    }
-
-    function get_inst_name($institution_id) {
-        return sql_select(SQL_SELECT_INSTNAME_BY_INSTID,
-            array(':id' => $institution_id))->fetch(PDO::FETCH_ASSOC)['name'];
-    }
-
     function is_ok_field_size() {
         return (strlen($_POST['first_name']) > 1 && strlen($_POST['last_name']) > 1 &&
             strlen($_POST['email']) > 1 && strlen($_POST['headline']) > 1 &&
@@ -70,13 +37,29 @@
 
     function validate_positions() {
         for ($pos = 1; $pos <= MAX_POS_ENTRIES; $pos++) {
-            if (isset($_POST['year' . $pos]) && isset($_POST['desc' . $pos])) {
-                if (strlen($_POST['year' . $pos]) < 1 || strlen($_POST['desc' . $pos]) < 1) {
+            if (isset($_POST['pos_year' . $pos]) && isset($_POST['pos_desc' . $pos])) {
+                if (strlen($_POST['pos_year' . $pos]) < 1 || strlen($_POST['pos_desc' . $pos]) < 1) {
                     $_SESSION['error'] = E_PROFILE_BLANK_FIELD;
                     return false;
                 }
-                if (!is_numeric($_POST['year' . $pos])) {
+                if (!is_numeric($_POST['pos_year' . $pos])) {
                     $_SESSION['error'] = E_NON_NUMERIC_POSITION;
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function validate_education() {
+        for ($edu = 1; $edu <= MAX_EDU_ENTRIES; $edu++) {
+            if (isset($_POST['edu_year' . $edu]) && isset($_POST['edu_school' . $edu])) {
+                if (strlen($_POST['edu_year' . $edu]) < 1 || strlen($_POST['edu_school' . $edu]) < 1) {
+                    $_SESSION['error'] = E_PROFILE_BLANK_FIELD;
+                    return false;
+                }
+                if (!is_numeric($_POST['edu_year' . $edu])) {
+                    $_SESSION['error'] = E_NON_NUMERIC_EDUCATION;
                     return false;
                 }
             }

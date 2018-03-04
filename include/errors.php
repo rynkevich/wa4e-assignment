@@ -7,4 +7,5 @@
     define('E_NO_PRIVILEGES_TO_DELETE', 'You are not allowed to delete this profile');
     define('E_NO_PRIVILEGES_TO_EDIT', 'You are not allowed to edit this profile');
     define('E_NON_NUMERIC_POSITION', 'Position year must be numeric');
+    define('E_NON_NUMERIC_EDUCATION', 'Education year must be numeric');
 ?>

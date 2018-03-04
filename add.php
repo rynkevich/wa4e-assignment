@@ -2,7 +2,9 @@
     require_once 'include/pdo.php';
     require_once 'include/common.php';
     require_once 'include/errors.php';
-    require_once 'include/position_queries.php';
+    require_once 'include/queries/profiles.php';
+    require_once 'include/queries/positions.php';
+    require_once 'include/queries/education.php';
 
     function add_entry() {
         if (!is_ok_field_size()) {
@@ -14,31 +16,36 @@
         } else if (!is_valid_email($_POST['email'])) {
             $_SESSION['error'] = E_INVALID_EMAIL;
             return;
+        } else if (!validate_education()) {
+            return;
         } else if (!validate_positions()) {
             return;
         }
 
+        insert_profile($_SESSION['user_id'], $_POST['image_url'],
+            $_POST['first_name'], $_POST['last_name'], $_POST['email'],
+            $_POST['headline'], $_POST['summary']);
+
         global $pdo;
-        $stmt = $pdo->prepare('INSERT INTO profiles (user_id, image_url, first_name, last_name,
-            email, headline, summary) VALUES (:uid, :img, :first, :last, :em, :hl, :sum)');
-        $stmt->execute(array(
-            ':uid' => $_SESSION['user_id'],
-            ':img' => $_POST['image_url'],
-            ':first' => $_POST['first_name'],
-            ':last' => $_POST['last_name'],
-            ':em' => $_POST['email'],
-            ':hl' => $_POST['headline'],
-            ':sum' => $_POST['summary'])
-        );
         $profile_id = $pdo->lastInsertId();
-        insert_positions($profile_id);
+
+        add_education($profile_id);
+        add_positions($profile_id);
         $_SESSION['success'] = 'Profile added';
     }
 
-    function insert_positions($profile_id) {
+    function add_positions($profile_id) {
         for ($pos = 1; $pos <= MAX_POS_ENTRIES; $pos++) {
-            if (isset($_POST['year' . $pos]) && isset($_POST['desc' . $pos])) {
-                sql_insert_position($profile_id, $_POST['year' . $pos], $_POST['desc' . $pos]);
+            if (isset($_POST['pos_year' . $pos]) && isset($_POST['pos_desc' . $pos])) {
+                insert_position($profile_id, $_POST['pos_year' . $pos], $_POST['pos_desc' . $pos]);
+            }
+        }
+    }
+
+    function add_education($profile_id) {
+        for ($edu = 1; $edu <= MAX_EDU_ENTRIES; $edu++) {
+            if (isset($_POST['edu_year' . $edu]) && isset($_POST['edu_school' . $edu])) {
+                insert_education($profile_id, $_POST['edu_school' . $edu], $_POST['edu_year' . $edu]);
             }
         }
     }
@@ -73,6 +80,7 @@
   <?php require_once 'styles/inc_styles.php'; ?>
   <?php require_once 'include/inc_jquery.php'; ?>
   <script src="js/position-handler.js"></script>
+  <script src="js/education-handler.js"></script>
 </head>
 
 <body>
@@ -107,6 +115,14 @@
       </p>
       <p><label for="txt_summary">Summary:</label></p>
       <p><textarea name="summary" rows="8" cols="80" id="txt_summary"></textarea></p>
+      <div id="blck_education">
+        <p>
+          <label for="btn_add_education">Education:</label>
+          <input type="button" id="btn_add_education" value="+" onclick="addEducationField();">
+          <input type="hidden" id="hint_max_edu_entries" value="<?= MAX_EDU_ENTRIES ?>">
+          <input type="hidden" id="hint_initial_edu_entries_count" value="0">
+        </p>
+      </div>
       <div id="blck_positions">
         <p>
           <label for="btn_add_position">Position:</label>
